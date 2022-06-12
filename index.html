@@ -9,6 +9,26 @@
     <title>Task List</title>
 </head>
 <body>
+    <div class="container">
+        <div class="row">
+            <div class="col s12">
+                <div id="main" class="card">
+                    <div class="card-content">
+                        <span class="card-title">Task List</span>
+                        <div class="row">
+                            <form id="task-form">
+                                <div class="input-field col s12">
+                                    <input type="text" name="task" id="task">
+                                    <label for="task">Enter a new task</label>
+                                </div>
+                                <input type="submit" value="Add a new task" class="btn">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script
         src="https://code.jquery.com/jquery-3.6.0.js"
@@ -16,5 +36,6 @@
         crossorigin="anonymous"
     ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>

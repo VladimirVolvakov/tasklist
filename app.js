@@ -10,14 +10,15 @@ loadAllEventListeners();
 
 function loadAllEventListeners () {
     form.addEventListener('submit', addTask);
-}
+    taskList.addEventListener('click', deleteTask);
+};
 
-// Add task function:
+// Add task function
 function addTask (event) {
+    // Check if input field is empty:
     if (taskInput.value === '') {
         alert('You should enter a task to add it to task list');
-    }
-
+    };
     // Create a list-item element:
     const listItem = document.createElement('li');
     // Add a class to list-item element:
@@ -40,4 +41,13 @@ function addTask (event) {
 
     // Prevent a default page reload when submit the form:
     event.preventDefault();
-}
+};
+
+// Delete task function
+function deleteTask (event) {
+    if (event.target.parentElement.classList.contains('delete-item')) {
+        if (confirm('Are you sure?')) {
+            event.target.parentElement.parentElement.remove();
+        };
+    };
+};

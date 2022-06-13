@@ -9,10 +9,44 @@ const taskFilter = document.querySelector('#task-filter');
 loadAllEventListeners();
 
 function loadAllEventListeners () {
+    document.addEventListener('DOMContentLoaded', getTaskList);
     form.addEventListener('submit', addTask);
     taskList.addEventListener('click', deleteTask);
     clearButton.addEventListener('click', clearTasks);
     taskFilter.addEventListener('keyup', filterTasks);
+};
+
+// Get task list function
+function getTaskList () {
+    let tasks;
+    // Check if there's already been a key 'tasks' in local storage: if thereisn't - put an empty 
+    // array as a value of tasks variable, if there is - get it from local storage, parse it and 
+    // assign it as a value of tasks variable:
+    if (localStorage.getItem('tasks') === null) {
+        tasks = [];
+    } else {
+        tasks = JSON.parse(localStorage.getItem('tasks'));
+    };
+
+    tasks.forEach(task => {
+        // Create a list-item element:
+        const listItem = document.createElement('li');
+        // Add a class to list-item element:
+        listItem.className = 'collection-item';
+        // Create a text node and append it to list-item element:
+        const textNode = document.createTextNode(task);
+        listItem.appendChild(textNode);
+        // Create a link element:
+        const link = document.createElement('a');
+        // Add classes to link element:
+        link.className = 'delete-item secondary-content';
+        // Add delete-icon html:
+        link.innerHTML = '<i class="fa fa-remove"></i>';
+        // Append link element to list-item element:
+        listItem.appendChild(link);
+        // Append list-item element to ul.collection element:
+        taskList.appendChild(listItem);
+    });
 };
 
 // Add task function

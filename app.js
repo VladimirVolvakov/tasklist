@@ -108,8 +108,33 @@ function deleteTask (event) {
         if (confirm('Are you sure?')) {
             // Remove list-item element that is a parent element of link.delete-item
             event.target.parentElement.parentElement.remove();
+            // Delete task from local storage:
+            deleteTaskFromLocalStorage(event.target.parentElement.parentElement);
         };
     };
+};
+
+// Delete task from local storage function
+function deleteTaskFromLocalStorage (task) {
+    let tasks;
+    // Check if there's already been a key 'tasks' in local storage: if thereisn't - put an empty 
+    // array as a value of tasks variable, if there is - get it from local storage, parse it and 
+    // assign it as a value of tasks variable:
+    if (localStorage.getItem('tasks') === null) {
+        tasks = [];
+    } else {
+        tasks = JSON.parse(localStorage.getItem('tasks'));
+    };
+    // Loop through task list in order to delete necessary task:
+    tasks.forEach((item, index) => {
+        if (task.textContent === item) {
+            tasks.splice(index, 1);
+        };
+    });
+    // Reset array with tasks in local storage:
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+    // Tell user that task was removed:
+    alert('Task was removed');
 };
 
 // Clear tasks function

@@ -38,11 +38,32 @@ function addTask (event) {
     listItem.appendChild(link);
     // Append list-item element to ul.collection element:
     taskList.appendChild(listItem);
+    // Save task to local storage:
+    saveTaskToLocalStorage(taskInput.value);
     // Clear input:
     taskInput.value = '';
 
     // Prevent a default page reload when submit the form:
     event.preventDefault();
+};
+
+// Save task function
+function saveTaskToLocalStorage (task) {
+    let tasks;
+    // Check if there's already been a key 'tasks' in local storage: if thereisn't - put an empty 
+    // array as a value of tasks variable, if there is - get it from local storage, parse it and 
+    // assign it as a value of tasks variable:
+    if (localStorage.getItem('tasks') === null) {
+        tasks = [];
+    } else {
+        tasks = JSON.parse(localStorage.getItem('tasks'));
+    };
+    // Add new task to array with tasks:
+    tasks.push(task);
+    // Reset array with tasks in local storage:
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+    // Tell user that task was saved:
+    alert('Task was saved');
 };
 
 // Delete task function

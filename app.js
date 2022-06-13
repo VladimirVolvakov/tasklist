@@ -12,6 +12,7 @@ function loadAllEventListeners () {
     form.addEventListener('submit', addTask);
     taskList.addEventListener('click', deleteTask);
     clearButton.addEventListener('click', clearTasks);
+    taskFilter.addEventListener('keyup', filterTasks);
 };
 
 // Add task function
@@ -56,13 +57,32 @@ function deleteTask (event) {
     };
 };
 
-// Clear tasks function:
-function clearTasks (event) {
+// Clear tasks function
+function clearTasks () {
     // Check if user confirms tasks removal:
     if (confirm('Do you really want to clear ALL the tasks?')) {
         // Get access to list-items with tasks:
         const tasks = document.querySelectorAll('.collection-item');
         // Start forEach loop to remove every task:
         tasks.forEach(task => task.remove());
-    }
-}
+    };
+};
+
+// Filter tasks function
+function filterTasks (event) {
+    // Get access to entered text from filter tasks input:
+    const text = event.target.value.toLowerCase();
+    // Get access to list-items with tasks:
+    const tasks = document.querySelectorAll('.collection-item');
+    // Start forEach loop to filter every task:
+    tasks.forEach(task => {
+        // Get access to task text content:
+        const item = task.firstChild.textContent;
+        // Check if entered in input text is present in task text content & show / don't show task:
+        if (item.toLowerCase().indexOf(text) !== -1) {
+            task.style.display = 'block';
+        } else {
+            task.style.display = 'none';
+        };
+    });
+};

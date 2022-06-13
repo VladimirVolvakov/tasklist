@@ -145,6 +145,8 @@ function clearTasks () {
         const tasks = document.querySelectorAll('.collection-item');
         // Start forEach loop to remove every task:
         tasks.forEach(task => task.remove());
+        // Clear tasks from local storage:
+        localStorage.clear();
     };
 };
 
